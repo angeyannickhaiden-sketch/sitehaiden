@@ -3,365 +3,622 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Haiden Ange - Mystique & Spiritualité</title>
+<title>HistoiresHaiden</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif;}
-html{scroll-behavior:smooth;}
-body,html{height:100%;overflow-x:hidden;color:#fff;transition:background-image 2s ease-in-out;}
-
-body{
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+/* ===== GENERAL ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Roboto',sans-serif; }
+body {
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#fff;
+    position:relative;
 }
 
-/* Navbar */
-nav{
-  width:100%;
-  background:rgba(0,0,0,0.7);
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:1000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 50px;
+/* ===== FONDS ANIMÉS AVEC IMAGES ===== */
+.background-image {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-3;
+    overflow:hidden;
 }
-nav .logo{font-size:26px;font-weight:700;color:#fff;}
-nav ul{list-style:none;display:flex;}
-nav ul li{margin-left:30px;}
-nav ul li a{text-decoration:none;color:#fff;font-weight:500;transition:0.3s;}
-nav ul li a:hover{color:#9b59b6;}
-.search-bar input{padding:6px 12px;border-radius:20px;border:none;outline:none;}
+.background-image img {
+    position:absolute;
+    opacity:0.3;
+    animation:floatImages linear infinite;
+}
+@keyframes floatImages {
+    0% { transform: translateY(100vh) rotate(0deg); }
+    100% { transform: translateY(-50vh) rotate(360deg); }
+}
 
-/* Page centrale */
-.main-container{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background: rgba(0,0,0,0.5);
+/* Dégradé animé derrière */
+body::before {
+    content:"";
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-4;
+    background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);
+    background-size:400% 400%;
+    animation:gradientBG 20s ease infinite;
 }
-.main-container h1{
-  font-size:60px;
-  margin-bottom:30px;
-  color:#9b59b6;
-  text-shadow:2px 2px 6px #000;
+@keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
-.search-box{display:flex;width:60%;max-width:700px;margin-bottom:20px;}
-.search-box input{flex:1;padding:15px 20px;border-radius:30px 0 0 30px;border:none;font-size:18px;}
-.search-box button{padding:15px 25px;border:none;background:#9b59b6;color:#fff;font-weight:bold;border-radius:0 30px 30px 0;cursor:pointer;transition:0.3s;}
-.search-box button:hover{background:#8e44ad;}
-.intro-text{font-size:20px;margin-top:20px;max-width:800px;text-shadow:1px 1px 3px #000;}
 
-/* Sections */
-section{
-  padding:80px 50px;
-  background: rgba(0,0,0,0.6);
-  text-shadow:1px 1px 3px #000;
+/* ===== HEADER ===== */
+header {
+    padding:40px 20px 20px 20px;
+    text-align:center;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(5px);
 }
-section h2{font-size:36px;margin-bottom:20px;color:#9b59b6;}
-section p{font-size:18px;margin-bottom:15px;line-height:1.7;}
-.citation{font-style:italic;color:#f1c40f;margin-top:10px;line-height:1.7;}
-.fade-in{opacity:0;animation:fadeIn 2s forwards;}
-.fade-in-delay{animation-delay:1s;}
-@keyframes fadeIn{to{opacity:1;}}
+header h1 {
+    font-size:3em;
+    margin-bottom:10px;
+}
+header p {
+    font-size:1.2em;
+    color:#ffeb3b;
+}
 
-/* WhatsApp */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50%;
-  width:60px;
-  height:60px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:30px;
-  text-decoration:none;
-  box-shadow:0 5px 10px rgba(0,0,0,0.5);
-  transition:0.3s;
+/* ===== RECHERCHE ===== */
+.search-container { text-align:center; margin:30px 0; }
+.search-container input {
+    padding:12px 25px;
+    width:60%;
+    border-radius:30px;
+    border:none;
+    outline:none;
+    font-size:1em;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
-.whatsapp:hover{transform:scale(1.1);}
 
-/* Responsive */
-@media(max-width:768px){
-  .main-container h1{font-size:40px;}
-  .search-box{flex-direction:column;width:80%;}
-  .search-box input,.search-box button{border-radius:30px;margin:5px 0;}
+/* ===== HISTOIRES ===== */
+.stories {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    padding:20px;
+    position:relative;
+    z-index:1;
 }
+.story {
+    background:rgba(0,0,0,0.5);
+    padding:15px;
+    border-radius:15px;
+    width:300px;
+    min-height:350px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    transition:transform 0.3s, box-shadow 0.3s;
+}
+.story:hover {
+    transform:translateY(-10px);
+    box-shadow:0 15px 25px rgba(0,0,0,0.5);
+}
+.story img {
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+.story h2 {
+    margin-bottom:10px;
+    font-size:1.5em;
+    color:#ffeb3b;
+    text-align:center;
+}
+.story p {
+    font-size:1em;
+    line-height:1.5;
+    color:#fff;
+    text-align:justify;
+}
+
+/* ===== ANIMATIONS FLOTTANTES ===== */
+.story:nth-child(1){animation:float1 5s ease-in-out infinite;}
+.story:nth-child(2){animation:float2 6s ease-in-out infinite;}
+.story:nth-child(3){animation:float3 7s ease-in-out infinite;}
+.story:nth-child(4){animation:float4 5.5s ease-in-out infinite;}
+.story:nth-child(5){animation:float5 6.5s ease-in-out infinite;}
+@keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(12px);}}
+@keyframes float3{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
+@keyframes float4{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+@keyframes float5{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
 </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav>
-  <div class="logo">Haiden Ange</div>
-  <ul>
-    <li><a href="#spiritualite">Spiritualité</a></li>
-    <li><a href="#mystique">Monde Mystique</a></li>
-    <li><a href="#influences">Influences</a></li>
-    <li><a href="#demons">Démons</a></li>
-    <li><a href="#conseils">Conseils</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="search-bar">
-    <input type="text" placeholder="Rechercher dans le monde mystique...">
-  </div>
-</nav>
+<!-- Fonds animés avec images -->
+<div class="background-image" id="background"></div>
 
-<!-- Page centrale -->
-<div class="main-container fade-in">
-  <h1>Haiden Ange</h1>
-  <div class="search-box">
-    <input type="text" placeholder="Tapez votre recherche spirituelle...">
-    <button onclick="search()">🔍</button>
-  </div>
-  <div class="intro-text">
-    Bienvenue dans l’univers de la spiritualité et du mystique. Explorez des histoires, des conseils, des forces invisibles, et trouvez des citations qui illuminent votre chemin intérieur.
-  </div>
+<header>
+    <h1>HistoiresHaiden</h1>
+    <p>Plongez dans des histoires émouvantes et inspirantes</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="search" placeholder="Rechercher une histoire..." onkeyup="searchStories()">
 </div>
 
-<!-- WhatsApp flottant -->
-<a href="https://wa.me/2250714371752?text=Bonjour,%20je%20viens%20du%20site.%20Je%20veux%20en%20savoir%20plus." class="whatsapp" target="_blank">&#x2709;</a>
+<div class="stories" id="stories">
+    <div class="story">
+        <img src="https://images.unsplash.com/photo-1601758123927-9db2317d5d95?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" alt="Le choix de Clara">
+        <h2>Le choix de Clara</h2>
+        <p>Clara a grandi dans un village difficile, confrontée à la trahison et aux choix douloureux...</p>
+    </div>
+    <div class="story">
+        <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" alt="Le dernier billet">
+        <h2>Le dernier billet</h2>
+        <p>Ahmed découvre un portefeuille et fait un choix qui changera sa vie...</p>
+    </div>
+    <div class="story">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" alt="La trahison de Simon">
+        <h2>La trahison de Simon</h2>
+        <p>Simon trahit sa meilleure amie, mais découvre que la vie a ses leçons...</p>
+    </div>
+    <div class="story">
+        <img src="https://images.unsplash.com/photo-1495605952590-0efb2ecf0c9d?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" alt="Le pont de l’adieu">
+        <h2>Le pont de l’adieu</h2>
+        <p>Lamine et Fatou se retrouvent après des années et doivent faire face à la fragilité de la vie...</p>
+    </div>
+    <div class="story">
+        <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" alt="Le mensonge de Marie">
+        <h2>Le mensonge de Marie</h2>
+        <p>Marie apprend que la réussite obtenue par le mensonge est éphémère...</p>
+    </div>
+</div>
 
 <script>
-const backgrounds = [
-  'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1499084732479-de2c02d45fcc?auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1950&q=80'
-];
-let current=0;
-function changeBackground(){
-  current=(current+1)%backgrounds.length;
-  document.body.style.backgroundImage=`url('${backgrounds[current]}')`;
+function searchStories() {
+    let input = document.getElementById('search').value.toLowerCase();
+    let stories = document.getElementById('stories').getElementsByClassName('story');
+    for(let i=0;i<stories.length;i++){
+        let title = stories[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+        stories[i].style.display = title.indexOf(input) > -1 ? "" : "none";
+    }
 }
-setInterval(changeBackground,10000);
-document.body.style.backgroundImage=`url('${backgrounds[0]}')`;
 
-function search(){
-  const query=document.querySelector('.search-box input').value;
-  if(query){alert("Vous avez recherché : " + query + "\nCette fonctionnalité sera bientôt améliorée !");}
+/* Génération d’images flottantes aléatoires */
+const bg = document.getElementById('background');
+const images = [
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=200&h=200', // nuage
+    'https://images.unsplash.com/photo-1522120693035-1e339a065ad6?fit=crop&w=200&h=200', // papillon
+    'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?fit=crop&w=200&h=200'  // étoile
+];
+
+for(let i=0;i<20;i++){
+    let img = document.createElement('img');
+    img.src = images[Math.floor(Math.random()*images.length)];
+    img.style.left = Math.random()*100+'vw';
+    img.style.top = Math.random()*100+'vh';
+    img.style.width = 50+Math.random()*100+'px';
+    img.style.animationDuration = 10+Math.random()*20+'s';
+    img.style.opacity = 0.3 + Math.random()*0.5;
+    bg.appendChild(img);
 }
 </script>
-
 </body>
 </html>
-<!-- Section : Spiritualité (version très longue) -->
-<section id="spiritualite" class="fade-in fade-in-delay" style="background:rgba(0,0,50,0.6); border-radius:15px; margin:20px; padding:50px;">
-  <h2>Spiritualité</h2>
+<section id="choix-de-clara" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1601758123927-9db2317d5d95?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="Le choix de Clara" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">Le choix de Clara</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Clara a grandi dans un petit village reculé, où la vie était rythmée par les saisons, les récoltes et les traditions ancestrales. Son enfance avait été bercée par les récits de sa grand-mère, qui parlait de courage, d’honneur et de loyauté. Mais dans la réalité du village, les conflits et les trahisons étaient fréquents. Les voisins se jalousaient, les familles se disputaient les terres et l’injustice semblait régner à chaque coin de rue.
+    </p>
 
-  <!-- Histoire 1 : Tino et la méditation -->
-  <p><strong>Histoire :</strong> Tino était un jeune homme de 22 ans, constamment sous pression. Ses journées étaient remplies de cours, de travail à temps partiel et de responsabilités familiales. Chaque soir, il rentrait épuisé, le corps fatigué et l’esprit saturé. Il avait l’impression de courir sans jamais avancer. Ses amis lui proposaient de sortir, de faire la fête ou de se distraire, mais aucune de ces solutions ne calmait vraiment son esprit. Il se sentait stressé, anxieux, et parfois même désespéré.</p>
-  
-  <p>Un soir, en parcourant des vidéos sur la spiritualité, il découvrit la méditation. Intrigué, il décida de tenter l’expérience. Le lendemain matin, il se leva dix minutes plus tôt que d’habitude, s’assit dans sa chambre, ferma les yeux et essaya de concentrer son attention sur sa respiration. Les premiers jours furent difficiles : son esprit vagabondait constamment, il se sentait frustré de ne pas pouvoir rester concentré. Mais il persévéra, notant dans un carnet chaque pensée qui venait et chaque émotion qu’il ressentait. Il appelait cela son “journal de l’âme”.</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        À l’école, Clara était connue pour sa gentillesse et son esprit de justice. Elle défendait toujours les plus faibles, même si cela lui valait des ennuis. Un jour, elle surprit son meilleur ami en train d’être humilié par d’autres élèves. Sans hésiter, elle intervint, se mettant elle-même face à la colère des enfants les plus influents du village. Ce fut le premier grand choix de sa vie : rester silencieuse et protégée, ou agir malgré le risque. Clara choisit d’agir, et ce jour-là, elle comprit qu’être courageuse ne signifiait pas l’absence de peur, mais la capacité de la surmonter.
+    </p>
 
-  <p>Après deux semaines, Tino commença à remarquer de petits changements. Il respirait plus calmement, se sentait légèrement plus léger, et commençait à mieux écouter les autres. Son sommeil s’améliora légèrement. Puis, à la quatrième semaine, ses amis remarquèrent qu’il souriait plus souvent et qu’il prenait des décisions plus réfléchies. Tino réalisa alors que la méditation ne changeait pas seulement son mental, mais apportait une <strong>paix intérieure durable</strong> et une clarté qu’il n’avait jamais connue.</p>
-  
-  <p>Il commença à étendre son temps de méditation à 20 minutes, à intégrer des moments de gratitude le soir et à réfléchir sur ses journées. Chaque geste simple devenait une étape vers un équilibre spirituel profond. Tino comprit alors que la spiritualité n’était pas un concept abstrait : c’était une pratique quotidienne, un chemin concret pour se rapprocher de soi-même et trouver la sérénité malgré les tempêtes de la vie.</p>
-  <p class="citation">"La paix commence là où tu décides de respirer profondément et d’écouter ton cœur." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Mais les défis de Clara ne faisaient que commencer. Quelques mois plus tard, une situation encore plus difficile se présenta. Son amie d’enfance, Lila, était victime d’une injustice grave : on l’accusait à tort d’un vol qu’elle n’avait pas commis. La famille de Clara lui conseilla de ne pas intervenir, de rester en sécurité et de laisser Lila se débrouiller seule. Chaque option semblait lourde de conséquences. Aider Lila pouvait lui causer des problèmes graves, mais rester passive trahirait la fidélité et l’amitié qui la liaient.
+    </p>
 
-  <!-- Histoire 2 : Julie et la conscience morale -->
-  <p><strong>Histoire :</strong> Julie était une jeune femme qui avait grandi dans un environnement où dire la vérité n’était pas toujours valorisé. Elle avait pris l’habitude de mentir ou d’exagérer pour se protéger ou pour impressionner ses amis. Petit à petit, elle se sentit vide et coupable. Chaque mensonge semblait laisser un poids dans son cœur, et elle commençait à douter d’elle-même.</p>
-  
-  <p>Un jour, après avoir blessé involontairement une amie proche par un mensonge qu’elle pensait anodin, Julie ressentit un profond regret. Elle décida de réfléchir sur sa vie et sur ses actes. Assise seule dans sa chambre, elle écrivit une longue lettre à elle-même : <em>“Je veux vivre dans la vérité et la bienveillance. Je veux que mes actions reflètent mes valeurs, et non ma peur de déplaire.”</em></p>
-  
-  <p>Elle commença à observer ses pensées, à écrire ses erreurs, à demander pardon quand elle se trompait. Petit à petit, elle vit un changement profond. Ses relations avec les autres devinrent plus authentiques, elle ressentit de la légèreté dans son esprit, et sa confiance en elle se renforça. Julie comprit que la spiritualité n’était pas seulement une pratique, mais un engagement à vivre en accord avec soi-même, à aligner ses actions avec ses valeurs et à élever son cœur chaque jour.</p>
-  <p class="citation">"La vérité que tu portes en toi est la lumière qui éclaire ton chemin." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Après de longues nuits d’insomnie, Clara réfléchit à ses valeurs, aux leçons de sa grand-mère et à tout ce qu’elle avait appris de la vie. Elle réalisa que parfois, faire le choix juste impliquait de prendre des risques. Elle décida donc d’aider Lila. Ensemble, elles affrontèrent les jugements injustes, les rumeurs du village et les menaces silencieuses. Clara se sentait épuisée, mais chaque petit pas vers la justice renforçait sa détermination et son courage.
+    </p>
 
-  <!-- Histoire 3 : Karim et le sens de la vie -->
-  <p><strong>Histoire :</strong> Karim avait toujours été un jeune homme curieux, mais il se sentait souvent perdu. Il observait les gens autour de lui : certains semblaient savoir exactement ce qu’ils voulaient, tandis que lui errait sans but précis. Chaque question sur le sens de la vie semblait sans réponse. Un soir, en marchant dans un parc, il observa un vieil homme aider un enfant à ramasser ses affaires tombées. Ce petit geste simple lui fit réfléchir : peut-être que le sens de la vie se trouvait dans les petits gestes quotidiens et dans la manière dont nous touchons la vie des autres.</p>
-  
-  <p>Karim commença alors à faire attention aux actions simples : aider ses voisins, écouter ses amis, sourire à des inconnus. Il nota ses expériences dans un journal spirituel, décrivant les émotions positives qu’il ressentait après chaque acte de gentillesse. Petit à petit, il se sentit plus connecté à son environnement, plus heureux et utile. Karim réalisa que le sens de la vie n’était pas toujours dans les grandes actions extraordinaires, mais dans la constance à faire le bien autour de soi.</p>
-  <p class="citation">"Ton chemin se découvre dans chaque geste de bonté que tu poses." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        L’épreuve la plus difficile survint lorsqu’un membre influent du village tenta de séparer Clara et Lila, convaincu que leur lien pourrait menacer son autorité. Clara fut confrontée à la peur et à la solitude. Elle ressentait une pression énorme, mais elle se rappela les paroles de sa grand-mère : “Le courage ne se mesure pas dans la facilité, mais dans la persévérance face à l’adversité.” Cette pensée lui donna la force de continuer, et elle réussit à protéger Lila, tout en gagnant le respect de certains villageois qui commencèrent à admirer son intégrité.
+    </p>
 
-  <!-- Histoire 4 : Sarah et la gratitude -->
-  <p><strong>Histoire :</strong> Sarah avait toujours l’impression que la vie lui était injuste. Elle voyait le monde comme un lieu rempli de défis et de frustrations. Chaque soir, elle se plaignait de ce qui n’allait pas et se sentait constamment insatisfaite. Un jour, un ami lui parla de la pratique de la gratitude et de ses effets sur l’esprit et le cœur. Elle décida d’essayer : chaque soir, elle écrirait trois choses pour lesquelles elle était reconnaissante, aussi petites soient-elles.</p>
-  
-  <p>Au début, Sarah peinait à trouver des raisons de gratitude. Mais en persistant, elle commença à remarquer de petits détails : un sourire échangé, une parole gentille, un moment de paix. Après plusieurs semaines, sa perception changea complètement. Elle se sentait plus positive, plus confiante, et ses relations avec les autres s’améliorèrent. Elle comprit que la gratitude avait le pouvoir de transformer sa vision du monde et d’éclairer son chemin intérieur.</p>
-  <p class="citation">"La gratitude transforme le moindre instant en lumière pour l’âme." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Au fil du temps, Clara devint un symbole de courage et de loyauté dans son village. Son choix de défendre son amie, malgré les risques, démontra que même dans un monde rempli de trahisons et de difficultés, il était possible de rester fidèle à ses valeurs. Elle comprit que les choix difficiles étaient ceux qui définissaient véritablement une personne et que le cœur, guidé par la compassion et le courage, était le meilleur guide dans la vie.
+    </p>
 
-  <!-- Histoire 5 : Le jeune homme perdu et la prière -->
-  <p><strong>Histoire :</strong> Un jeune homme, désorienté et en colère contre lui-même et le monde, cherchait un moyen de se reconnecter. Ses journées étaient remplies de frustrations et de déceptions. Un jour, il décida d’essayer la prière. Il ne savait pas exactement quoi dire, mais il s’assit calmement chaque matin, fermant les yeux, et commença à parler simplement à son âme. Il demandait guidance, force et paix pour lui-même et pour les autres.</p>
-  
-  <p>Au début, il ne sentit rien. Mais il persévéra, notant dans un carnet ses émotions, ses doutes et ses petites victoires. Petit à petit, il commença à ressentir une sérénité intérieure, sa colère diminua et il devint plus patient avec lui-même et les autres. Il réalisa que la prière n’était pas seulement un mot, mais un moyen de se connecter profondément à son essence, à sa sagesse intérieure, et à une force plus grande que lui.</p>
-  <p class="citation">"La prière n’est pas seulement un mot, c’est une ouverture de l’âme." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "La véritable force se révèle lorsque nous faisons le choix d’être fidèles à notre cœur, même lorsque le monde entier nous met à l’épreuve."
+    </p>
 
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Courage, Amitié, Difficultés de la vie
+    </p>
 </section>
-<!-- Section : Monde Mystique (version longue) -->
-<section id="mystique" class="fade-in fade-in-delay" style="background:rgba(0,0,50,0.6); border-radius:15px; margin:20px; padding:50px;">
-  <h2>Monde Mystique</h2>
+<section id="dernier-billet" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="Le dernier billet" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">Le dernier billet</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Ahmed était un jeune homme ambitieux, vivant dans une grande ville où la vie semblait toujours trop rapide et impitoyable. Chaque jour, il travaillait dur pour joindre les deux bouts, mais les difficultés financières ne semblaient jamais le quitter. Malgré sa persévérance, il ressentait souvent un profond sentiment d’injustice face à un monde où certains avaient tout et d’autres rien.
+    </p>
 
-  <!-- Histoire 1 : Le rêve de l’eau -->
-  <p><strong>Histoire :</strong> Clara avait toujours été fascinée par ses rêves, mais un rêve en particulier revenait chaque semaine : elle se trouvait submergée par une immense vague, incapable de nager, l’eau lui couvrant presque le visage. Chaque matin, elle se réveillait trempée de sueur et avec un sentiment d’oppression. Confuse, elle décida de consulter un mentor spirituel, qui lui expliqua que ce rêve symbolisait ses émotions refoulées et sa peur de perdre le contrôle sur sa vie.</p>
-  
-  <p>Clara commença alors un travail quotidien de méditation et de journalisation. Elle décrivait chaque rêve, chaque sentiment, et tentait de comprendre ce que son subconscient essayait de lui dire. Peu à peu, elle apprit à identifier ses peurs et à les affronter dans sa vie quotidienne. Elle prit conscience que les rêves n’étaient pas seulement des images étranges, mais des messages de l’âme pour guider ses choix, renforcer sa confiance et apaiser son esprit.</p>
-  
-  <p>Avec patience et persévérance, Clara sentit son anxiété diminuer. Les vagues dans ses rêves se faisaient moins oppressantes, et elle se sentait plus forte face aux défis de la vie réelle.</p>
-  <p class="citation">"Chaque rêve est un message de ton âme ; écoute-le, il te guide vers la lumière." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Un matin, alors qu’il se rendait au travail, Ahmed trouva un portefeuille abandonné sur le trottoir. En l’ouvrant, il découvrit un seul billet à l’intérieur. Un billet qui, pour beaucoup, pourrait sembler insignifiant, mais pour Ahmed, il représentait une tentation et un choix moral difficile. Devria-t-il garder cet argent pour lui, sachant qu’il en avait vraiment besoin, ou tenter de retrouver le propriétaire et faire ce qui est juste ?
+    </p>
 
-  <!-- Histoire 2 : Les signes dans la nature -->
-  <p><strong>Histoire :</strong> Luc traversait une période particulièrement difficile. Ses projets professionnels échouaient, ses amitiés se distendaient, et il se sentait perdu. Un matin, alors qu’il se rendait au travail, un oiseau blanc vola devant lui trois fois de suite. Luc se sentit intrigué, comme si l’univers essayait de lui transmettre un message.</p>
-  
-  <p>Il décida d’observer les signes autour de lui, notant dans un carnet chaque événement inhabituel et chaque synchronicité. Petit à petit, il commença à comprendre qu’il ne s’agissait pas de simples coïncidences, mais de messages pour l’encourager à persévérer et à rester attentif à son intuition. Grâce à cette pratique, Luc reprit confiance en ses décisions et commença à réaliser ses projets, ressentant un profond sentiment d’harmonie avec le monde qui l’entourait.</p>
-  <p class="citation">"Les signes sont des éclats de l’univers qui parlent à ceux qui savent écouter." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Les heures passèrent et Ahmed ne pouvait s’empêcher de penser à ce billet. Il imaginait les histoires possibles : peut-être appartenait-il à quelqu’un dans le besoin, ou à un vieil homme qui dépendait de chaque centime pour survivre. Son esprit était tiraillé entre la tentation immédiate et la conscience de ses valeurs.
+    </p>
 
-  <!-- Histoire 3 : Le vieux grimoire -->
-  <p><strong>Histoire :</strong> Emma, curieuse et passionnée d’histoire, trouva un vieux grimoire dans la bibliothèque de son grand-père. Le livre était rempli de symboles, de prières anciennes et de rituels mystiques. Au début, elle fut intimidée par ce langage étrange, mais sa curiosité la poussa à étudier ces symboles et à pratiquer certaines méditations indiquées dans le grimoire.</p>
-  
-  <p>Chaque matin, elle consacrait du temps à méditer sur les symboles et à réfléchir sur leurs significations. Elle nota ses ressentis, ses intuitions et les effets de ces pratiques sur sa vie quotidienne. Avec le temps, Emma développa une sérénité intérieure et une intuition plus fine. Elle comprit que la véritable magie résidait dans la discipline personnelle et la connexion à son énergie intérieure.</p>
-  <p class="citation">"L’histoire et les symboles cachent des clés pour éveiller notre esprit." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Après une longue réflexion, Ahmed décida de partir à la recherche du propriétaire. Il questionna les commerçants du quartier, vérifia les caméras de sécurité et demanda aux passants s’ils avaient perdu quelque chose. Chaque réponse négative le rendait plus anxieux, mais il ne voulait pas céder à la facilité. Il savait que le vrai courage ne réside pas seulement dans les grandes actions, mais aussi dans les petites décisions qui forgent le caractère.
+    </p>
 
-  <!-- Histoire 4 : L’intuition qui sauve -->
-  <p><strong>Histoire :</strong> Rami devait choisir entre deux emplois : l’un très prestigieux mais stressant, et l’autre plus modeste mais aligné avec ses valeurs. Son esprit rationnel lui disait de prendre le premier, mais son intuition lui criait que quelque chose n’allait pas. Après plusieurs nuits de réflexion, il décida de suivre son instinct et choisit le second poste.</p>
-  
-  <p>Quelques mois plus tard, Rami réalisa que son choix l’avait protégé de situations toxiques et de relations professionnelles stressantes. Il comprit que l’intuition est souvent la voix de l’âme, une force subtile mais puissante qui guide nos pas vers le bien-être et l’harmonie.</p>
-  <p class="citation">"Ton instinct est la voix de ton âme ; écoute-la avant toute décision." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Finalement, Ahmed retrouva le propriétaire : un vieil homme au visage fatigué, qui avait perdu son portefeuille en se rendant au marché. La joie et le soulagement dans ses yeux furent un moment inoubliable pour Ahmed. Ce simple billet, qui semblait petit et insignifiant, avait eu un impact immense sur la vie de quelqu’un. Ahmed comprit que l’honnêteté et la bienveillance peuvent créer des chaînes de bonté dans le monde, même dans les situations les plus simples.
+    </p>
 
-  <!-- Histoire 5 : La tradition des ancêtres -->
-  <p><strong>Histoire :</strong> Dans son village africain, Awa grandissait entourée de traditions anciennes : prières aux ancêtres, rituels de protection et bénédictions pour chaque nouvelle étape de la vie. Au début, elle ne comprenait pas pourquoi ces pratiques étaient importantes et pensait qu’elles étaient dépassées. Mais en participant aux cérémonies et en écoutant les récits des anciens, elle ressentit une énergie apaisante et un sentiment de guidance invisible dans ses choix quotidiens.</p>
-  
-  <p>Elle réalisa que ces traditions n’étaient pas simplement des rites, mais des outils pour connecter l’homme à ses racines, à la sagesse des générations passées, et pour cultiver la paix intérieure. Awa se sentit plus confiante, protégée et en harmonie avec elle-même et son environnement.</p>
-  <p class="citation">"Honorer ses racines, c’est nourrir son esprit et éclairer son chemin." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "La véritable richesse ne réside pas dans l’argent que l’on possède, mais dans les choix justes que l’on fait chaque jour."
+    </p>
 
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Honnêteté, Courage, Valeurs Morales
+    </p>
 </section>
-<!-- Section : Influences Négatives (version longue) -->
-<section id="influences" class="fade-in fade-in-delay" style="background:rgba(0,0,50,0.6); border-radius:15px; margin:20px; padding:50px;">
-  <h2>Influences Négatives</h2>
+<section id="trahison-simon" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="La trahison de Simon" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">La trahison de Simon</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Simon et Élise étaient amis depuis l’enfance. Ils avaient partagé rires, secrets et rêves d’avenir. Mais à mesure que Simon grandissait, il commença à se sentir frustré par sa vie et jaloux du succès d’Élise. Alors que celle-ci progressait dans ses études et gagnait la reconnaissance des enseignants et camarades, Simon, rongé par l’envie, commença à prendre des décisions qui allaient trahir la confiance de son amie.
+    </p>
 
-  <!-- Histoire 1 : La mauvaise compagnie -->
-  <p><strong>Histoire :</strong> Marc était un jeune homme intelligent et ambitieux, mais il tomba dans un groupe d’amis qui passaient leurs journées à fumer, à boire et à se disputer. Au début, il pensait pouvoir rester lui-même, mais petit à petit, il adopta leurs comportements : mensonges, disputes, et irresponsabilité. Sa confiance en lui diminua et sa motivation pour ses études s’effondra. Sa famille et ses enseignants commencèrent à s’inquiéter.</p>
-  
-  <p>Un jour, après avoir échoué un examen important à cause de ses distractions et de ses mauvaises fréquentations, Marc se sentit perdu et honteux. Il réalisa que son entourage détruisait sa vie. Il décida de changer : il rompit avec le groupe, se rapprocha d’amis sérieux et chercha des mentors pour l’aider à se reconstruire. Avec le temps, sa motivation revint, sa confiance en lui renaquit, et il apprit une leçon essentielle : la compagnie que l’on garde influence profondément notre destin.</p>
-  <p class="citation">"Choisis tes amis comme tu choisis ton chemin : avec sagesse et conscience." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Un jour, Simon divulgua accidentellement une information importante concernant un projet d’Élise à un groupe de concurrents. Ce simple geste, motivé par l’envie et l’impatience, provoqua une série de problèmes pour Élise, qui vit son travail remis en cause et ses efforts moqués. Simon, voyant les conséquences de ses actes, ressentit un mélange de peur, de regret et de honte. Mais le pire restait à venir : il devait maintenant faire face à la colère et à la déception de son amie.
+    </p>
 
-  <!-- Histoire 2 : La dépendance aux réseaux sociaux -->
-  <p><strong>Histoire :</strong> Sarah passait ses nuits sur les réseaux sociaux. Elle comparait sa vie à celle des autres, regardait des vidéos inutiles et se sentait constamment insatisfaite. Ses études et sa vie sociale en souffraient. Ses parents et amis la préviennent, mais elle ne les écoutait pas. Elle commença à se sentir isolée, anxieuse, et sans énergie pour ses projets personnels.</p>
-  
-  <p>Un jour, après avoir lu un livre sur la discipline personnelle, Sarah décida de limiter son temps sur les écrans. Elle commença à méditer 15 minutes chaque matin et à noter ses objectifs dans un journal. Petit à petit, elle retrouva énergie, sérénité et motivation. Elle réalisa que la dépendance aux distractions numériques pouvait enfermer l’esprit et éloigner de soi-même, mais qu’avec de la discipline, il est toujours possible de retrouver sa liberté intérieure.</p>
-  <p class="citation">"Ce que tu nourris chaque jour dans ton esprit devient la couleur de ton monde." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Simon passa plusieurs nuits à réfléchir à la manière de réparer sa trahison. Il voulait se racheter, mais ne savait pas comment regagner la confiance d’Élise. La peur de perdre une amitié précieuse le rongeait. Chaque interaction avec elle était empreinte de tension et de culpabilité. Ses sentiments contradictoires le mettaient à l’épreuve et l’obligeaient à affronter ses propres faiblesses.
+    </p>
 
-  <!-- Histoire 3 : Les habitudes destructrices -->
-  <p><strong>Histoire :</strong> Kofi avait pris l’habitude de procrastiner, remettant toujours ses devoirs et projets à plus tard. Au début, il pensait que ce n’était pas grave, mais rapidement, il accumula des retards, subit des critiques et perdit confiance en lui. Ses objectifs semblaient toujours inatteignables. Il se sentait coincé dans un cercle vicieux de stress et d’inefficacité.</p>
-  
-  <p>Après plusieurs mois, Kofi décida de changer. Il créa un planning détaillé, fixa des objectifs réalistes et s’engagea à les respecter quotidiennement. Chaque succès, même petit, lui donnait motivation et confiance. Il comprit que les habitudes façonnent le destin, et que chaque geste compte. La discipline personnelle devint sa clé pour transformer sa vie et retrouver sa paix intérieure.</p>
-  <p class="citation">"Tes habitudes façonnent ton destin ; choisis-les avec attention." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Finalement, Simon décida de se confesser honnêtement. Il chercha un moment calme pour parler à Élise, s’excuser sincèrement et expliquer les raisons qui l’avaient poussé à agir ainsi. Étonnamment, Élise, après un moment de colère et de tristesse, accepta son excuse. Elle lui montra que même après une trahison, la loyauté et le pardon pouvaient reconstruire une relation, mais que cela nécessitait du courage, de l’humilité et de la sincérité.
+    </p>
 
-  <!-- Histoire 4 : Les pensées toxiques -->
-  <p><strong>Histoire :</strong> Fatou passait son temps à critiquer les autres et à se dévaloriser elle-même. Elle cultivait la jalousie et l’amertume. Ses relations s’étaient détériorées, et elle se sentait seule et malheureuse. Chaque pensée négative semblait renforcer son mal-être. Elle réalisa un jour qu’elle devait changer son état d’esprit pour transformer sa vie.</p>
-  
-  <p>Fatou commença un travail quotidien : observer ses pensées, écrire ce qui la blessait, puis reformuler ses pensées de manière positive. Elle pratiqua la méditation et la gratitude. Petit à petit, elle sentit une légèreté intérieure et une joie nouvelle. Ses relations avec les autres s’améliorèrent, et elle développa une force intérieure qui lui permit de rester sereine face aux défis.</p>
-  <p class="citation">"Ce que tu penses de toi-même devient ta réalité ; cultive des pensées lumineuses." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        À travers cette expérience, Simon apprit que l’envie et l’impatience pouvaient détruire ce qui était précieux, mais que la prise de responsabilité et le courage d’affronter ses erreurs permettaient de réparer et d’apprendre. La trahison lui avait ouvert les yeux sur la valeur de l’amitié, de la confiance et de l’honnêteté.
+    </p>
 
-  <!-- Histoire 5 : Les mauvaises habitudes intimes -->
-  <p><strong>Histoire :</strong> Amadou était dépendant à la pornographie et aux pensées sexuelles excessives. Il se sentait coupable, isolé et impuissant à contrôler ses désirs. Cette situation affectait sa confiance en lui, ses relations et sa spiritualité. Un jour, il décida de reprendre le contrôle de sa vie. Il commença par établir des règles strictes pour éviter les situations de tentation, pratiqua la méditation, et chercha des conseils spirituels et psychologiques.</p>
-  
-  <p>Avec patience et discipline, Amadou retrouva progressivement la maîtrise de lui-même et la paix intérieure. Il comprit que les forces négatives pouvaient être surmontées par la volonté et la sagesse, et que la véritable liberté réside dans la maîtrise de ses désirs et la protection de son âme.</p>
-  <p class="citation">"La vraie liberté commence quand tu maîtrises tes désirs et respectes ton âme." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "Reconnaître ses erreurs et demander pardon est la plus grande preuve de force et de maturité."
+    </p>
 
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Trahison, Amitié, Courage moral
+    </p>
 </section>
-<!-- Section : Forces Négatives et Démons (version longue) -->
-<section id="demons" class="fade-in fade-in-delay" style="background:rgba(0,0,50,0.6); border-radius:15px; margin:20px; padding:50px;">
-  <h2>Forces Négatives et Démons</h2>
+<section id="pont-adieu" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1495605952590-0efb2ecf0c9d?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="Le pont de l’adieu" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">Le pont de l’adieu</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Lamine et Fatou s’étaient connus à l’adolescence. Leur amitié avait rapidement évolué en un lien profond, presque indissociable. Ils partageaient tout : les rires, les peines, les rêves et les espoirs. Mais la vie avait ses propres plans et souvent, elle mettait l’amour et l’amitié à l’épreuve.
+    </p>
 
-  <!-- Histoire 1 : La tentation du mensonge -->
-  <p><strong>Histoire :</strong> Antoine était un jeune homme honnête, mais il se retrouva dans une situation difficile où mentir semblait être la solution la plus simple pour éviter un conflit. Au début, il pensa que ce petit mensonge ne ferait de mal à personne. Cependant, il commença à se sentir mal à l’aise, son esprit devenait troublé et sa conscience le rattrapait sans cesse. Il comprit que céder à cette tentation était comme ouvrir une porte à des forces négatives, car chaque mensonge renforçait sa peur et sa culpabilité.</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Un jour, une tragédie frappa la famille de Fatou. Elle fut obligée de quitter la ville pour s’occuper de ses proches malades. Lamine, dévasté par cette séparation soudaine, se sentit vide et impuissant. Chaque jour, il passait sur le pont où ils s’étaient souvent retrouvés pour se promener et discuter. Ce pont, symbole de leur amitié et de leur complicité, devint aussi le lieu de son chagrin, un rappel douloureux de l’absence de Fatou.
+    </p>
 
-  <p>Antoine décida de se confier à un mentor spirituel et de dire la vérité malgré les conséquences possibles. Il ressentit un poids s’enlever de ses épaules et réalisa que la force intérieure et la vérité avaient plus de puissance que la peur ou les manipulations extérieures.</p>
-  <p class="citation">"Chaque mensonge que tu refuses renforce la lumière dans ton âme." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Les semaines passèrent, et Lamine attendait chaque message, chaque appel avec impatience. Mais les responsabilités de Fatou l’éloignaient, et la communication devint rare. Le pont de l’adieu, comme il l’appelait désormais dans son cœur, devint le lieu où il se confiait à ses souvenirs et à ses émotions. Il y laissait tomber ses larmes, ses peurs et ses regrets. La distance mettait à l’épreuve leur lien, mais Lamine refusait de céder à la désespérance.
+    </p>
 
-  <!-- Histoire 2 : La colère qui dévore -->
-  <p><strong>Histoire :</strong> Fatima était connue pour sa gentillesse, mais un jour, une injustice au travail déclencha une colère intense. Cette émotion devint presque incontrôlable et commença à influencer son comportement et ses relations. Elle se mit à critiquer et à juger les autres sans raison, perdant progressivement sa paix intérieure.</p>
-  
-  <p>Elle réalisa que cette colère était une force négative qui prenait le contrôle de son esprit. Pour se libérer, Fatima commença des exercices de respiration, des prières et des réflexions sur la compassion. Chaque jour, elle choisissait consciemment de répondre avec patience et compréhension. Petit à petit, sa colère perdit sa puissance et elle retrouva la sérénité. Elle comprit que reconnaître et transformer les forces négatives en forces de croissance est la clé de la maîtrise de soi.</p>
-  <p class="citation">"La colère non maîtrisée est un démon intérieur ; la patience et la compassion sont la clé pour le vaincre." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Un soir, alors qu’il s’asseyait sur le pont en regardant le coucher du soleil, Lamine se remémora tous les moments partagés avec Fatou. Il comprit que malgré la distance et les obstacles, l’amitié et l’amour véritables ne disparaissaient jamais. Ce pont, bien qu’imposant et solennel, symbolisait aussi l’espoir et la force de continuer à croire en ce lien, même lorsqu’ils étaient séparés par des kilomètres.
+    </p>
 
-  <!-- Histoire 3 : Les peurs d’enfance -->
-  <p><strong>Histoire :</strong> Kofi avait grandi avec des peurs d’enfance : la peur de l’abandon, du rejet et de l’échec. En adulte, ces peurs se manifestaient dans toutes ses décisions, créant anxiété et hésitation. Il ressentait comme si des forces invisibles l’empêchaient de progresser.</p>
-  
-  <p>Pour combattre ces démons intérieurs, Kofi entreprit un voyage de réflexion et d’écriture. Il décrivit ses peurs, comprit leur origine, et développa des rituels quotidiens de courage et de confiance en soi. Il pratiquait des affirmations, méditait et visualisait ses réussites. Avec le temps, les anciennes peurs s’atténuèrent, et Kofi se sentit enfin libre de ses choix et maître de son destin.</p>
-  <p class="citation">"Confronter tes peurs est le premier pas pour chasser les démons intérieurs." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Avec le temps, Fatou revint, et leur amitié renaquit, plus forte qu’avant. Ils réalisèrent que la vie pouvait les éloigner physiquement, mais jamais spirituellement. Le pont de l’adieu avait été le test de leur lien, et ils en étaient sortis grandis, plus sages et conscients de la valeur de chaque instant passé ensemble.
+    </p>
 
-  <!-- Histoire 4 : L’envie et la jalousie -->
-  <p><strong>Histoire :</strong> Awa voyait ses amis réussir et ressentait de l’envie et de la jalousie, ce qui commença à la ronger intérieurement. Elle se comparait constamment, diminuait ses propres réussites et se sentait malheureuse. Cette énergie négative affectait sa santé mentale et ses relations, créant un cercle vicieux.</p>
-  
-  <p>Un mentor lui enseigna la gratitude et la reconnaissance de ses propres talents. Chaque jour, elle notait trois réussites personnelles et trois qualités chez elle qu’elle appréciait. Petit à petit, l’envie se transforma en admiration et inspiration, et Awa sentit un poids disparaître. Elle réalisa que les forces négatives comme la jalousie ne disparaissent que lorsque l’on cultive la conscience, l’amour et la gratitude.</p>
-  <p class="citation">"Remplacer l’envie par la gratitude chasse les ténèbres et illumine l’âme." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "Parfois, l’adieu n’est pas une fin, mais une épreuve qui nous apprend la valeur du vrai lien et de l’amour durable."
+    </p>
 
-  <!-- Histoire 5 : Les addictions et les désirs incontrôlés -->
-  <p><strong>Histoire :</strong> Amadou, jeune adulte, avait développé une dépendance à des plaisirs éphémères et destructeurs, comme la pornographie et les pensées excessives. Chaque tentative de contrôle échouait, et il ressentait une culpabilité profonde et un sentiment de vide. Il comprit que ces désirs incontrôlés étaient des forces négatives qui pouvaient détruire l’équilibre de l’esprit et de l’âme.</p>
-  
-  <p>Amadou entreprit un programme de discipline : méditation quotidienne, écriture de ses émotions, pratiques de pleine conscience, et limitation des tentations. Petit à petit, il retrouva la maîtrise de soi, le respect de son corps et une paix intérieure profonde. Il comprit que les forces négatives ne peuvent être vaincues que par la conscience, la discipline et le respect de son être intérieur.</p>
-  <p class="citation">"La véritable liberté naît quand tu maîtrises tes désirs et protèges ton âme." – Haiden Ange</p>
-
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Amitié, Séparation, Espoir, Tristesse
+    </p>
 </section>
-<!-- Section : Grandir Intérieurement (version longue) -->
-<section id="grandir" class="fade-in fade-in-delay" style="background:rgba(0,0,50,0.6); border-radius:15px; margin:20px; padding:50px;">
-  <h2>Grandir Intérieurement</h2>
+<section id="mensonge-marie" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="Le mensonge de Marie" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">Le mensonge de Marie</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Marie était une jeune femme brillante et ambitieuse. Depuis son enfance, elle rêvait de réussir et de se faire un nom dans son domaine. Mais dans sa quête du succès, elle se retrouva confrontée à un dilemme moral : fallait-il mentir pour avancer ou rester honnête et prendre le risque de stagner ?
+    </p>
 
-  <!-- Histoire 1 : Se relever après une erreur -->
-  <p><strong>Histoire :</strong> Julien avait commis une erreur professionnelle qui lui valut une forte critique de son supérieur. Il se sentit humilié, déçu et démotivé. Pendant plusieurs jours, il resta dans le regret et la culpabilité, incapable de voir une issue positive. Mais un matin, il décida de changer de perspective. Il prit le temps de réfléchir à ce qui s’était passé et nota ce qu’il pouvait apprendre de cette expérience. Puis il demanda pardon à ceux qu’il avait affectés et fit un plan concret pour corriger ses erreurs et progresser.</p>
-  
-  <p>Avec le temps, Julien constata que cette erreur, au lieu de le détruire, était devenue une leçon précieuse. Il gagna en maturité, confiance et sagesse. Il comprit que chaque échec pouvait devenir une étape vers la croissance intérieure si l’on osait se relever et apprendre.</p>
-  <p class="citation">"Chaque chute est une occasion de se relever plus fort et plus sage." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Dans un projet professionnel crucial, Marie fit un faux pas : elle embellit certains faits et exagéra ses compétences pour impressionner ses supérieurs. Cette décision, qu’elle jugeait inoffensive à ce moment-là, eut des conséquences inattendues. Son travail fut reconnu et applaudi, mais le mensonge, même subtil, commença à peser lourd sur sa conscience.
+    </p>
 
-  <!-- Histoire 2 : Se purifier intérieurement -->
-  <p><strong>Histoire :</strong> Fatou passait ses journées à critiquer les autres, à jalouser et à ressasser des rancunes anciennes. Son esprit était chargé de négativité et elle se sentait constamment fatiguée et irritée. Un jour, elle décida de pratiquer une purification intérieure : écrire ses ressentis, pardonner aux autres et bénir ceux qu’elle avait envie de critiquer. Chaque soir, elle méditait et visualisait une lumière douce envahir son cœur et chasser la colère.</p>
-  
-  <p>Au fil des semaines, Fatou remarqua un changement profond : elle se sentait légère, heureuse et en paix avec elle-même et son entourage. Elle réalisa que la purification intérieure n’était pas un acte magique, mais un travail quotidien de conscience et de choix positifs.</p>
-  <p class="citation">"La lumière que tu crées à l’intérieur de toi éclaire tout autour de toi." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Chaque réussite obtenue par ce mensonge devenait un rappel constant de sa faute. Marie sentait que ses collègues se fiaient à elle et que sa crédibilité était en jeu. La peur d’être découverte, la honte et le stress l’accompagnaient à chaque réunion, chaque présentation. Elle réalisa alors que la gloire acquise sans honnêteté était vide et qu’elle ne lui apporterait jamais la paix intérieure.
+    </p>
 
-  <!-- Histoire 3 : Discipline personnelle et constance -->
-  <p><strong>Histoire :</strong> Karim voulait améliorer sa vie, mais il avait du mal à maintenir une routine. Il décidait chaque semaine de méditer, lire, écrire et réfléchir, mais abandonnait au bout de quelques jours. Frustré, il comprit que la croissance intérieure nécessitait discipline et constance. Il créa un emploi du temps précis, détermina des moments dédiés à la spiritualité et s’engagea à respecter ses habitudes, même pour quelques minutes chaque jour.</p>
-  
-  <p>Avec cette discipline, Karim développa une meilleure concentration, une patience accrue et une confiance solide en lui. Il comprit que la maîtrise de soi et la constance dans les bonnes pratiques sont la base de la transformation intérieure durable.</p>
-  <p class="citation">"La constance dans les petites actions mène à de grandes transformations." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Finalement, Marie prit une décision courageuse : elle avoua son mensonge à son équipe et assuma ses erreurs. La réaction fut surprenante. Ses collègues l’admirèrent pour son courage et son honnêteté. Bien que certaines opportunités immédiates se soient dissipées, elle gagna quelque chose de bien plus précieux : la confiance, le respect et la sérénité.
+    </p>
 
-  <!-- Histoire 4 : Cultiver l’amour et la bienveillance -->
-  <p><strong>Histoire :</strong> Awa avait tendance à se concentrer sur ses problèmes et oubliait de montrer de la bienveillance autour d’elle. Un mentor lui enseigna que l’amour et la compassion ne doivent pas être seulement des mots, mais des actions concrètes. Awa commença à aider discrètement ses voisins, soutenir ses amis, et offrir son temps à ceux qui avaient besoin. Chaque geste, aussi petit soit-il, illuminait son cœur et renforçait son esprit.</p>
-  
-  <p>Au fil du temps, Awa remarqua un changement : elle se sentait heureuse, connectée aux autres et confiante. Elle comprit que grandir intérieurement, c’est avant tout **cultiver la lumière et l’amour dans ses actions quotidiennes**.</p>
-  <p class="citation">"Aimer et aider transforme l’âme et fait grandir l’esprit." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Cette expérience transforma Marie. Elle comprit que le succès ne vaut rien si l’on sacrifie ses valeurs et que la véritable réussite réside dans l’intégrité et la sincérité. Elle devint un exemple pour ceux qui l’entouraient, montrant que le courage d’admettre ses erreurs ouvre souvent la voie à de nouvelles opportunités.
+    </p>
 
-  <!-- Histoire 5 : Trouver la paix malgré les épreuves -->
-  <p><strong>Histoire :</strong> Tino avait traversé de nombreux défis : perte d’emploi, rupture amoureuse, tensions familiales. Chaque problème semblait l’écraser, et il ressentait un profond désespoir. Un jour, il décida de se concentrer sur ce qu’il pouvait contrôler : sa respiration, ses pensées et ses actions. Il commença à écrire ses émotions, méditer, prier et se fixer de petits objectifs chaque jour.</p>
-  
-  <p>Peu à peu, Tino sentit son esprit se libérer. Il ne pouvait pas changer le passé, mais il pouvait transformer sa réaction face aux difficultés. Il apprit que la paix intérieure ne dépend pas des circonstances extérieures, mais de la façon dont on choisit de les affronter avec conscience, patience et sagesse.</p>
-  <p class="citation">"La paix n’est pas l’absence de tempêtes, mais la force de naviguer avec sagesse et calme." – Haiden Ange</p>
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "La réussite durable n’est pas celle que l’on obtient par la tromperie, mais celle que l’on construit avec honnêteté et courage."
+    </p>
 
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Tromperie, Honnêteté, Courage, Réussite
+    </p>
 </section>
-<!-- Section : À propos et contact WhatsApp -->
-<section id="contact" class="fade-in fade-in-delay" style="background:rgba(0,0,50,0.6); border-radius:15px; margin:20px; padding:50px; text-align:center;">
-  <h2>À propos de Haiden Ange</h2>
+<section id="galere-karim" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="La galère de Karim" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">La galère de Karim</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Karim était un jeune homme plein d’ambition, mais la vie ne lui avait pas facilité les choses. Il vivait dans un quartier pauvre, où le chômage et les difficultés financières étaient monnaie courante. Chaque matin, il se levait avant l’aube pour aider sa famille et chercher des opportunités qui semblaient toujours hors de portée.
+    </p>
 
-  <p>Bonjour, je suis <strong>Haiden Ange</strong>. 🌟<br>
-  Je suis passionné par la spiritualité, le monde mystique et la croissance intérieure.  
-  Mon objectif est de partager des histoires, des conseils et des inspirations pour aider chacun à trouver la paix, la sagesse et la maîtrise de soi.</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Malgré tous ses efforts, Karim enchaînait les petits boulots précaires. Il travaillait des heures interminables, mais à la fin du mois, l’argent manquait toujours. Ses amis partaient parfois en vacances ou achetaient de nouvelles choses, et lui se retrouvait à rêver de ces choses simples qu’il ne pouvait pas se permettre.
+    </p>
 
-  <p>Sur ce site, vous trouverez :</p>
-  <ul style="text-align:left; display:inline-block; text-align:left;">
-    <li>Des histoires spirituelles immersives</li>
-    <li>Des explications sur le monde mystique et les signes de l’invisible</li>
-    <li>Des conseils pour éviter les influences négatives et grandir intérieurement</li>
-    <li>Des citations et inspirations pour votre quotidien</li>
-  </ul>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Un jour, Karim eut l’opportunité d’un emploi stable, mais il devait se déplacer dans une autre ville. C’était un risque énorme : il devait laisser sa famille et tout ce qu’il connaissait derrière lui. Après de longues nuits à réfléchir, Karim décida de prendre ce risque. Il savait que la galère ne disparaîtrait pas instantanément, mais c’était le seul moyen de changer sa vie.
+    </p>
 
-  <p>Si vous souhaitez me contacter directement pour des conseils ou poser vos questions, cliquez sur le bouton ci-dessous :</p>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        La transition fut difficile. Karim se sentait seul, loin des repères familiers, et les obstacles s’accumulaient. Mais il continua à se battre, à apprendre et à persévérer. Chaque petit succès, chaque défi surmonté, renforçait sa détermination et son courage. Il comprit que la galère faisait partie du chemin et que seule la persévérance pouvait le conduire vers un avenir meilleur.
+    </p>
 
-  <!-- Bouton WhatsApp -->
-  <a href="https://wa.me/2250714371752" target="_blank" 
-     style="display:inline-block; background:linear-gradient(45deg,#4a00e0,#8e2de2); color:white; font-weight:bold; padding:15px 30px; border-radius:50px; text-decoration:none; font-size:18px; transition:0.3s;">
-    💬 Me contacter sur WhatsApp
-  </a>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Avec le temps, Karim réussit à stabiliser sa vie. Il put aider sa famille, réaliser certains de ses rêves et inspirer les jeunes de son quartier. Il apprit que même dans les moments les plus difficiles, la patience, le courage et la détermination sont les clés pour surmonter la galère.
+    </p>
 
-  <p style="margin-top:20px; font-style:italic; color:#ccc;">
-    "Chaque conversation peut illuminer une âme et ouvrir un chemin vers la paix intérieure." – Haiden Ange
-  </p>
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "Les épreuves de la vie ne sont pas des barrières, mais des marches qui nous élèvent vers notre destinée."
+    </p>
+
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Galère, Persévérance, Courage, Détermination
+    </p>
+</section>
+<section id="mort-mamadou" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="La mort de Mamadou" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">La mort de Mamadou</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Mamadou était un jeune homme apprécié dans son quartier pour sa gentillesse et sa générosité. Il aidait ses voisins, partageait ses modestes ressources et était toujours prêt à tendre la main à ceux qui en avaient besoin. Sa vie, bien que simple, était remplie de sens et d’amour.  
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Un jour, alors qu’il rentrait chez lui après une journée de travail, Mamadou fut victime d’un accident tragique. La nouvelle se répandit rapidement dans le quartier et plongea sa famille et ses amis dans une profonde tristesse. Ceux qui l’avaient connu réalisèrent à quel point il avait marqué leur vie, souvent par de petites actions invisibles mais significatives.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        La perte de Mamadou força les habitants à réfléchir sur la fragilité de la vie et sur l’importance de la gratitude. Les voisins racontaient ses histoires, ses gestes d’entraide et ses paroles réconfortantes. Même après sa disparition, il continuait à inspirer ceux qui l’avaient connu, leur montrant que chaque action, aussi petite soit-elle, laisse une trace durable.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        La famille de Mamadou, bien que dévastée, trouva du réconfort dans le souvenir de sa bonté et de son amour. Ses amis décidèrent de poursuivre ses actions, de perpétuer sa générosité et de créer un environnement meilleur autour d’eux. Mamadou avait peut-être quitté le monde physique, mais son esprit et son exemple demeuraient vivants dans le cœur de chacun.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        La mort de Mamadou fut une leçon sur la valeur de chaque instant, sur l’importance de l’empathie et de la solidarité. Elle rappela à tous que, même face à la perte, il est possible de transformer la douleur en inspiration et en actions positives.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "La vie est fragile, mais les actions de cœur traversent le temps et continuent de toucher ceux que nous aimons."
+    </p>
+
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Mort, Tristesse, Solidarité, Inspiration
+    </p>
+</section>
+<section id="secret-vanessa" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="Le secret de Vanessa" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">Le secret de Vanessa</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Vanessa travaillait dans une grande école privée en tant que professeur adulte, expérimentée et respectée. Sa vie semblait bien organisée, mais derrière son sourire se cachait un secret : elle entretenait une relation compliquée avec un collègue, Marc, un adulte également. Leur liaison était passionnée mais pleine de tensions, car chacun devait gérer la pression des responsabilités professionnelles et des regards indiscrets.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Marc et Vanessa se retrouvaient souvent après les heures de travail, dans des moments volés où la passion et le désir s’entremêlaient avec la culpabilité et le stress. Chaque rencontre était un mélange de tendresse, de sensualité et de frissons interdits, car ils savaient que leur relation, bien que consensuelle, devait rester discrète pour éviter les rumeurs et les jugements dans l’établissement.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Mais le secret de Vanessa n’était pas seulement romantique. Elle devait naviguer entre ses responsabilités de professeur, ses émotions et la peur d’être découverte. Marc, de son côté, l’aimait profondément mais savait que leur relation pouvait compliquer leurs carrières. Chaque décision devenait un dilemme : suivre son cœur ou respecter les limites imposées par la société et le travail.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Malgré tous les obstacles, leur liaison leur apportait une force insoupçonnée. Les moments partagés les aidaient à mieux gérer leur quotidien stressant et leur donnaient l’énergie de se surpasser. Mais la tension et les non-dits rendaient chaque rencontre plus intense et plus fragile. Vanessa comprit que l’amour et le désir étaient des forces puissantes, mais qu’ils nécessitaient maturité, prudence et responsabilité.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        À travers cette relation secrète mais consensuelle, Vanessa et Marc apprirent la valeur de la confiance, de la communication et du respect. Ils découvrirent que la passion pouvait coexister avec la responsabilité, et que même les relations les plus complexes pouvaient s’épanouir si elles étaient guidées par la sincérité et l’amour véritable.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "L’amour et le désir demandent courage et sincérité ; les relations secrètes ne révèlent leur beauté que lorsque la confiance et le respect guident chaque pas."
+    </p>
+
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Romance adulte, Tromperie, Passion, Drame
+    </p>
+</section>
+<section id="mensonge-sarah" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="Le mensonge de Sarah" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">Le mensonge de Sarah</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Sarah était mariée à Julien, un militaire en mission à l’étranger. Chaque jour, elle vivait avec l’incertitude, l’absence et la peur pour la sécurité de son mari. Malgré la distance et les sacrifices, elle croyait en leur amour et s’efforçait de maintenir une vie stable pour eux. Mais peu à peu, Sarah commença à remarquer des incohérences dans les récits de Julien lorsqu’il l’appelait ou envoyait des messages.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Après quelques semaines de doute, la vérité éclata : Julien la trompait avec une femme rencontrée lors de ses déplacements. La révélation fut un choc pour Sarah. Elle se sentit trahie, humiliée et dévastée par cette tromperie alors qu’elle avait tout donné à leur relation. La douleur et la colère se mêlaient à la tristesse de l’absence prolongée de son mari.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Pendant plusieurs nuits, Sarah réfléchit à son avenir. Devait-elle pardonner et continuer à espérer que Julien changerait, ou devait-elle tourner la page et reconstruire sa vie seule ? Chaque pensée était une bataille intérieure. Elle se rendit compte que rester fidèle à elle-même et à ses valeurs serait le seul moyen de surmonter cette épreuve.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Finalement, Sarah prit la décision de se détacher de Julien. Elle trouva du soutien auprès de sa famille et de ses amis, qui l’aidèrent à retrouver confiance et force. Elle commença à se concentrer sur ses passions, son travail et son bien-être. La trahison, bien que douloureuse, devint pour elle un catalyseur de croissance personnelle et de résilience.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        À travers cette épreuve, Sarah apprit que l’amour véritable doit s’accompagner de respect et de loyauté. Elle comprit que la dignité et la force intérieure sont plus précieuses que toute relation qui ne repose pas sur la sincérité. Cette expérience la transforma en une femme plus forte, consciente de sa valeur et capable de se reconstruire.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "La trahison d’autrui ne diminue jamais votre valeur ; elle révèle simplement la force qui sommeille en vous."
+    </p>
+
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Tromperie, Infidélité, Résilience, Drame
+    </p>
+</section>
+<section id="heritage-resurrection" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="L’héritage et la résurrection de Ponapewa" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">L’héritage et la résurrection de Ponapewa</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Ponapewa avait vécu des années de souffrance et de trahison. Après la perte de sa famille et la trahison de personnes proches, elle se retrouvait seule, brisée et sans repères. La vie semblait lui avoir tout pris, laissant derrière elle un vide immense. Chaque jour était un combat pour garder la tête hors de l’eau et retrouver un sens à son existence.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Un jour, Ponapewa reçut une lettre inattendue : elle héritait d’une maison et d’un petit patrimoine laissé par un oncle qu’elle n’avait presque jamais connu. Cet héritage, bien que modeste, représentait plus qu’une richesse matérielle : c’était une opportunité de renaissance, de reconstruction et de liberté. Elle décida de prendre cette chance pour se réinventer et tourner la page de ses anciennes blessures.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        En aménageant la maison et en organisant sa nouvelle vie, Ponapewa retrouva peu à peu confiance en elle. Elle investit dans ses passions, renoua avec des amis de confiance et prit soin d’elle-même. Chaque action, chaque décision, était un pas vers sa résurrection. Les cicatrices de son passé demeuraient, mais elles ne la définissaient plus ; elles devenaient des symboles de sa force et de sa résilience.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Peu à peu, Ponapewa transforma sa vie et son environnement. L’héritage matériel n’était plus seulement un bien, mais un tremplin pour réaliser ses rêves. Elle se découvrit capable de faire face à l’adversité, de créer des opportunités et d’inspirer ceux qui l’entouraient. Son passé douloureux se transformait en moteur pour un futur lumineux.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "La renaissance ne vient pas de ce que la vie nous prend, mais de ce que nous choisissons de construire avec ce qu’elle nous donne."
+    </p>
+
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Héritage, Résilience, Reconstruction, Motivation
+    </p>
+</section>
+<section id="chenelle-reconstruction" style="padding:50px 20px; background:rgba(0,0,0,0.6); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?crop=entropy&cs=tinysrgb&fit=crop&h=400&w=600" 
+         alt="Chenelle et sa reconstruction" 
+         style="width:100%; border-radius:15px; margin-bottom:25px;">
+    
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">La reconstruction de Chenelle</h2>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Chenelle était une jeune fille timide, réservée et douce, qui vivait sa vie discrètement, entourée de quelques amis proches. À l’école, elle se faisait rarement remarquer, préférant la tranquillité aux confrontations ou aux grandes aventures. Mais sa vie prit un tournant inattendu lorsqu’elle tomba enceinte à l’adolescence.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        La nouvelle fut un choc pour sa famille et ses proches. Au lieu de recevoir du soutien, Chenelle fut rejetée et critiquée. Elle se sentit seule, incomprise et humiliée. Les jours et les nuits étaient remplis de larmes et de solitude, et la jeune fille dut faire face à un dilemme immense : abandonner son enfant ou se battre pour lui et pour sa propre dignité.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Avec courage, Chenelle décida de garder son enfant. Elle travailla dur pour subvenir à leurs besoins, jonglant entre études, travail et soins pour son bébé. La route était difficile, semée d’obstacles financiers, émotionnels et sociaux. Mais chaque sourire de son enfant et chaque petit succès la motivait à continuer et à ne jamais abandonner.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Au fil des années, Chenelle se reconstruisit. Elle trouva un emploi stable, rencontra des personnes de confiance et bâtit une nouvelle famille avec un partenaire aimant qui acceptait son enfant comme le sien. La jeune fille timide qu’elle était autrefois devint une femme forte, déterminée et épanouie, capable de transformer la douleur et le rejet en amour et réussite.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        L’histoire de Chenelle est celle de la résilience et du courage face aux épreuves. Elle démontre qu’aucune situation difficile ne peut empêcher une personne de se reconstruire, de trouver le bonheur et de créer un environnement rempli d’amour pour soi et pour ses proches.
+    </p>
+
+    <p style="font-size:1.1em; line-height:1.7; font-style:italic; text-align:center; color:#ffd700; margin-bottom:20px;">
+        "Même dans l’adversité, la force et l’amour peuvent transformer la douleur en une nouvelle vie pleine d’espoir."
+    </p>
+
+    <p style="font-size:1em; line-height:1.6; color:#ffcccb;">
+        <strong>Catégorie :</strong> Résilience, Maternité, Reconstruction, Courage
+    </p>
+</section>
+<!-- Section À propos -->
+<section id="apropos" style="padding:50px 20px; background:rgba(255,255,255,0.1); border-radius:15px; margin:30px auto; max-width:900px; color:#fff;">
+    <h2 style="text-align:center; font-size:2em; color:#ffeb3b; margin-bottom:20px;">À propos</h2>
+    <p style="font-size:1.1em; line-height:1.7; text-align:justify; margin-bottom:20px;">
+        Bienvenue sur <strong>HistoiresHaiden</strong>, votre site dédié aux récits captivants, dramatiques et motivants. Ici, vous trouverez des histoires longues et détaillées sur la vie, l’amour, la trahison, la résilience et la reconstruction personnelle. Chaque histoire est accompagnée d’images évocatrices, de citations inspirantes et de catégories pour une navigation facile.  
+        Nous créons ce contenu pour vous divertir, vous inspirer et vous rappeler que chaque épreuve peut être transformée en force et en motivation.
+    </p>
+    
+    <p style="font-size:1.1em; line-height:1.7; text-align:center; margin-top:30px;">
+        <a href="https://wa.me/2250714371752" target="_blank" 
+           style="display:inline-block; padding:15px 25px; background-color:#25D366; color:#fff; font-weight:bold; border-radius:10px; text-decoration:none; font-size:1.2em;">
+           Contactez-moi sur WhatsApp
+        </a>
+    </p>
+</section>
+
+<!-- Section Droits d'auteur -->
+<section id="droits-auteur" style="padding:30px 20px; background:rgba(0,0,0,0.7); border-radius:15px; margin:30px auto; max-width:900px; color:#fff; text-align:center;">
+    <p style="font-size:1em; line-height:1.6; margin-bottom:10px;">
+        &copy; 2025 <strong>Haiden Ange Yannick Hhh</strong>. Tous droits réservés.
+    </p>
+    <p style="font-size:1em; line-height:1.6;">
+        La reproduction, distribution ou publication de ce contenu sans autorisation est strictement interdite.
+    </p>
 </section>
